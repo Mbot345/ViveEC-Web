@@ -78,9 +78,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME': 'ViveEC',
-        'USER': 'ViveEC_AdminLogin',
-        'PASSWORD': 'Admin123*',
-        'HOST': 'MSI',
+        # Reemplazar con las credenciales de SQL Server configuradas localmente
+        # Ejemplo:
+        # USER = 'ViveEC_AdminLogin'
+        # PASSWORD = 'Password definida en el scrip SQL'
+        # HOST = 'NombreServidorSQL'
+        'USER': 'USUARIO_SQL',
+        'PASSWORD': 'PASSWORD_SQL',
+        'HOST': 'SERVIDOR_SQL',
 
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',
