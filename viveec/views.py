@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 import calendar
 import json
 
-# LOGIN USUARIO
+
 def login_usuario(request):
 
     if request.method == 'POST':
@@ -42,7 +42,7 @@ def login_usuario(request):
     return render(request, 'viveec/login_usuario.html')
 
 
-# LOGIN ARTISTA
+
 def login_artista(request):
 
     if request.method == 'POST':
@@ -85,14 +85,14 @@ def registro_usuario(request):
         pais = request.POST['pais']  
 
         with connection.cursor() as cursor:
-            # 1. Validar si el correo ya existe
+            
             cursor.execute("SELECT correoUsuario FROM Usuarios.Usuario WHERE correoUsuario = %s", [correo])
             if cursor.fetchone():
                 return render(request, 'viveec/registro_usuario.html', {
                     'error': 'El correo ya se encuentra registrado'
                 })
 
-            # 2. Si no existe, procedemos con el registro
+            
             cursor.execute("SELECT TOP 1 IdUsuario FROM Usuarios.Usuario ORDER BY IdUsuario DESC")
             resultado = cursor.fetchone()
             ultimo_id = resultado[0] if resultado else 'U000'
@@ -109,7 +109,7 @@ def registro_usuario(request):
 
     return render(request, 'viveec/registro_usuario.html')
 
-#REGISTRO ARTISTA
+
 def registro_artista(request):
     with connection.cursor() as cursor:
         cursor.execute("SELECT idDiscografica, nombreDiscografica FROM Musica.Discografica")
@@ -122,7 +122,7 @@ def registro_artista(request):
         discografica = request.POST['discografica'] or None
         
         with connection.cursor() as cursor:
-            # 1. Validar si el correo ya existe
+            
             cursor.execute("SELECT correoArtista FROM Musica.Artista WHERE correoArtista = %s", [correo])
             if cursor.fetchone():
                 return render(request, 'viveec/registro_artista.html', {
@@ -130,7 +130,7 @@ def registro_artista(request):
                     'discograficas': discograficas
                 })
 
-            # 2. Si no existe, insertar
+            
             cursor.execute("SELECT TOP 1 idArtista FROM Musica.Artista ORDER BY idArtista DESC")
             ultimo_id = cursor.fetchone()[0]
             nuevo_id = f'A{int(ultimo_id[1:]) + 1:03}'
@@ -147,7 +147,7 @@ def registro_artista(request):
 
     return render(request, 'viveec/registro_artista.html', {'discograficas': discograficas})
 
-# DASHBOARD USUARIO
+
 def dashboard_usuario(request):
     nombre_usuario = request.session.get('usuario_nombre')
     
@@ -1164,7 +1164,7 @@ def suscripcion_usuario(request):
                 cursor.execute("""
                     EXEC SP_CrearSuscripcion %s, %s, %s, %s, %s, %s, 'Aprobado'
                 """, [nuevo_id_s, nuevo_id_p, id_usuario, tipo, monto, metodo])
-                return redirect('/suscripcion-usuario/') # Recarga para ver el cambio
+                return redirect('/suscripcion-usuario/')
             except Exception as e:
                 error_formulario = str(e)
 
