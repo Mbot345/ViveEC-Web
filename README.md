@@ -34,7 +34,7 @@ pip install -r requirements.txt
 Ejecutar el script SQL ubicado en:
 
 ```text
-database/ViveEC_Completo.sql
+database/Script Creacion base de datos ViceEC.sql
 ```
 
 ### 5. Configurar la conexión a SQL Server
